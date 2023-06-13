@@ -25,6 +25,16 @@ const Cart = ({ cartItems }) => {
 
   const uniqueBooks = [...new Set(cart.map((item) => item.id))];
 
+  const handleCheckout = () => {
+    // Simulate successful purchase
+    const successMessage = "Successfully purchased items in the cart.";
+    showAlert(successMessage);
+  };
+
+  const showAlert = (message) => {
+    alert(message); // Display the message using a simple browser alert
+  };
+
   return (
     <div className="centered bg-img" style={{ flexDirection: "column" }}>
       <h2 className="display-3 text-white text-center">Cart</h2>
@@ -73,9 +83,9 @@ const Cart = ({ cartItems }) => {
         <Link to="/book" className="btn mt-5">
           Go Back
         </Link>{" "}
-        <Link to="" className="btn mt-5">
-          CheckOut
-        </Link>
+        <button onClick={handleCheckout} className="btn mt-5">
+          Checkout
+        </button>
       </div>
     </div>
   );
