@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import BooksPage from "./BookPage";
-import SearchBar from "./SearchBar";
-export default function Book({ handleAddToCart }) {
+import SearchBar from "../FeatureComponent/SearchBar";
+import { useLocation } from "react-router-dom";
+export default function Book({ handleAddToCart,cartItems }) {
   const [searchQuery, setSearchQuery] = useState("Web Development");
   const [filter, setFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
@@ -15,7 +16,8 @@ export default function Book({ handleAddToCart }) {
   const handleSortChange = (value) => {
     setSortBy(value);
   };
-
+  const location = useLocation();
+  const id = location.state ? location.state.id : null;
   return (
     <div>
       <SearchBar
@@ -25,6 +27,8 @@ export default function Book({ handleAddToCart }) {
         handleSortChange={handleSortChange}
       />
       <BooksPage
+      cartItems={cartItems}
+        user={id}
         filter={filter}
         sortBy={sortBy}
         searchQuery={searchQuery}

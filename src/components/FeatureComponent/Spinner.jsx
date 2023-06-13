@@ -41,7 +41,7 @@ export default function LoaderExample() {
             }}
             style={{
               height: "50px",
-              background: "#1b5788",
+              background: "#0fbcf9",
               width: "50px",
               borderRadius: "2% 50%",
             }}

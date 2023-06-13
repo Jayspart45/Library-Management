@@ -11,44 +11,56 @@ body {
   background: #071622;
   overflow-x: hidden;
   background: linear-gradient(
-    to right,
-    rgba(13, 44, 68, 0.4),
-    rgba(13, 44, 68, 0.4)
-  );
+      to right,
+      rgba(13, 44, 68, 0.4),
+      rgba(13, 44, 68, 0.4)
+    ),
+    url(./assets/img2.svg);
+  background-position: center;
   background-repeat: no-repeat;
-  /* background-size: contain; */
+
+  background-repeat: no-repeat;
 }
-@keyframes loading {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-/*  */
+
+/* Pagination  */
 .pagination {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
+  /* background: #071622; */
+  padding: 10px;
 }
 
 .page-item {
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 4px;
   text-align: center;
   background-color: #fff;
+  margin: 0 2px;
+  box-shadow: 5px 5px 10px rgba(245, 245, 245, 0.2);
+  /* border: 1px solid rgba(13, 44, 68); */
+  padding: 4px 10px;
 }
 
 .page-item.active {
-  background-color: #0fbcf9;
+  background-color: #1b5788;
   color: #fff;
 }
 
 .page-link {
   color: #000;
   font-size: 1rem;
+  border: none;
+}
+.page-item.active .page-link {
+  background: transparent;
+}
+.pagination .break {
+  background: #efefef;
+  color: #071622;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
 }
 
 .page-link:hover {
@@ -71,7 +83,8 @@ body {
 .next {
   border-left: 1px solid #0fbcf9;
 }
-/*  */
+
+/* Card & Books */
 .card {
   width: 18rem;
   height: auto;
@@ -135,6 +148,8 @@ body {
 .availability--not-available {
   color: red;
 }
+
+/* Search Bar */
 .Searchbar {
   display: flex;
   justify-content: center;
@@ -174,6 +189,8 @@ body {
   background-color: #1b5788;
 }
 
+/* BookList */
+
 .col {
   display: flex;
   justify-content: center;
@@ -200,7 +217,19 @@ body {
   background: forestgreen;
 }
 
-/*  */
+/*  Card List */
+
+
+.CardItem {
+  list-style: none;
+  flex-wrap: wrap;
+}
+.carditem,
+.Login form label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 .CartList {
   display: flex;
   justify-content: center;
@@ -212,8 +241,18 @@ body {
   gap: 20px;
   padding: 10px;
   border-radius: 2px;
+  border-collapse: collapse;
 }
-.carditem button {
+
+.CartList td,
+.CartList th {
+  width: 200px;
+
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.CartList button {
   padding: 5px 15px;
   border-radius: 2px;
   background: #9eabb4;
@@ -221,36 +260,52 @@ body {
   color: #fff;
   margin-left: 10px;
 }
-.CardItem {
-  list-style: none;
-  flex-wrap: wrap;
+.bg-img{
+  background: url(./assets/img3.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
-.carditem,
-.Login form label {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-/*  */
+/* Login */
 .Login form {
   padding: 50px 20px;
-  background: rgba(13, 44, 68, 0.7);
+  background: rgba(13, 44, 68, 0.1);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   color: #fff;
   flex-direction: column;
   display: flex;
-  width: 400px;
+  font-size: 16px;
+  width: 500px;
+
   border-radius: 4px;
   justify-content: center;
   align-items: center;
+  text-transform: uppercase;
   gap: 20px;
   border: 3px solid rgba(245, 244, 245, 0.8);
   box-shadow: 5px 5px 20px rgba(3, 3, 3, 0.2);
   background-position: center;
   background-size: cover;
-  background-image: url(./assets/img2.svg);
 }
- .btn:hover {
+.btn:hover {
   color: #efefef;
   background: #071622;
+}
+
+/* Topbar */
+.topBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.userLogo {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  height: 30px;
+  background: #0d2c44;
+  padding: 20px 10px;
+  border-radius: 2px;
+  align-items: center;
 }

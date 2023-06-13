@@ -26,7 +26,6 @@ app.post("/", async (req, res) => {
   }
 });
 
-
 app.post("/signup", async (req, res) => {
   const { email, password } = req.body;
   const data = {
@@ -39,7 +38,7 @@ app.post("/signup", async (req, res) => {
       res.json("Exists");
     } else {
       res.json("Not Exists");
-      await collection.insertMany([data])
+      await collection.insertMany([data]);
     }
   } catch (e) {
     res.json("Not Found");

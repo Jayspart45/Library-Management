@@ -1,5 +1,5 @@
-import React from "react";
-
+import React,{useState} from "react";
+import Alert from "../FeatureComponent/Alert";
 const BookItem = ({ book, handleAddToCart }) => {
   const {
     title,
@@ -9,8 +9,15 @@ const BookItem = ({ book, handleAddToCart }) => {
     imageLinks,
     industryIdentifiers,
   } = book.volumeInfo;
+  const [showAlert, setShowAlert] = useState(false);
   const saleInfo = book.saleInfo;
-
+  const addToCart = () => {
+    handleAddToCart(book);
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 1000);
+  };
   return (
     <div className="book-item card">
       {imageLinks && imageLinks.thumbnail && (
@@ -34,9 +41,10 @@ const BookItem = ({ book, handleAddToCart }) => {
           ? industryIdentifiers.length
           : "-"}
       </p>
-      <button className="cartbtn" onClick={() => handleAddToCart(book)}>
+      <button className="cartbtn" onClick={addToCart}>
         Add to Cart
       </button>
+      {showAlert && <Alert type={"success"} title={title+" Book Added to Cart"} />}
     </div>
   );
 };

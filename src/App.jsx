@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Book from "./components/Book";
-import Cart from "./components/Cart";
+import Book from "./components/BookComponent/Book";
+import Cart from "./components/FeatureComponent/Cart";
 import Login from "./components/account/Login";
 import Signup from "./components/account/Signup";
 
@@ -18,7 +18,7 @@ const App = () => {
       <Routes>
         <Route index exact path="/" element={<Login />}></Route>
         <Route exact path="/signup" element={<Signup />}></Route>
-        <Route exact path="/book" element={<Book  handleAddToCart={handleAddToCart} />}></Route>
+        <Route exact path="/book" element={<Book cartItems={cart} handleAddToCart={handleAddToCart} />}></Route>
         <Route exact path="/cart" element={<Cart cartItems={cart} />}></Route>
       </Routes>
     </Router>
