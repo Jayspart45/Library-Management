@@ -38,7 +38,7 @@ export default function SignUp() {
       });
 
       if (response.data === "Exists") {
-        setAlert({ type: "error", message: "User already exists" });
+        setAlert({ type: "danger", message: "User already exists" });
       } else if (response.data === "Not Exists") {
         navigate("/book", { state: { id: email } });
       }
