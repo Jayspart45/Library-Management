@@ -1,21 +1,27 @@
 import React, { useState } from "react";
-import SearchBar from "./components/SearchBar";
-import BooksPage from "./components/BookPage";
+import Book from "./components/Book";
+import Cart from "./components/Cart";
+import Login from "./components/account/Login";
+import Signup from "./components/account/Signup";
 
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 const App = () => {
-  const [searchQuery, setSearchQuery] = useState("Web Development");
+  const [cart, setCart] = useState([]);
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
+  const handleAddToCart = (book) => {
+    console.log(book);
+    setCart((prevCart) => [...prevCart, book]);
   };
-
+  
   return (
-    <div>
-      {/* <Spinner/> */}
-      <SearchBar onSearch={handleSearch} />
-      <BooksPage searchQuery={searchQuery} />
-      
-    </div>
+    <Router>
+      <Routes>
+        <Route index exact path="/" element={<Login />}></Route>
+        <Route exact path="/signup" element={<Signup />}></Route>
+        <Route exact path="/book" element={<Book  handleAddToCart={handleAddToCart} />}></Route>
+        <Route exact path="/cart" element={<Cart cartItems={cart} />}></Route>
+      </Routes>
+    </Router>
   );
 };
 

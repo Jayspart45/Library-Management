@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookItem = ({ book }) => {
+const BookItem = ({ book, handleAddToCart }) => {
   const {
     title,
     authors,
@@ -10,7 +10,7 @@ const BookItem = ({ book }) => {
     industryIdentifiers,
   } = book.volumeInfo;
   const saleInfo = book.saleInfo;
-  console.log(industryIdentifiers);
+
   return (
     <div className="book-item card">
       {imageLinks && imageLinks.thumbnail && (
@@ -34,6 +34,9 @@ const BookItem = ({ book }) => {
           ? industryIdentifiers.length
           : "-"}
       </p>
+      <button className="cartbtn" onClick={() => handleAddToCart(book)}>
+        Add to Cart
+      </button>
     </div>
   );
 };
