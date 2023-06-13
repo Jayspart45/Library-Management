@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import SearchBar from './components/SearchBar';
-import BooksPage from './components/BookPage';
+import React, { useState } from "react";
+import SearchBar from "./components/SearchBar";
+import BooksPage from "./components/BookPage";
 
 const App = () => {
-  const [searchQuery, setSearchQuery] = useState('Web Development');
+  const [searchQuery, setSearchQuery] = useState("Web Development");
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -11,8 +11,10 @@ const App = () => {
 
   return (
     <div>
+      {/* <Spinner/> */}
       <SearchBar onSearch={handleSearch} />
       <BooksPage searchQuery={searchQuery} />
+      
     </div>
   );
 };

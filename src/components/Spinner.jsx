@@ -1,77 +1,53 @@
-import React from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import styled from "styled-components";
 
-const loadingContainer = {
-  width: "4rem",
-  height: "4rem",
-  display: "flex",
-  justifyContent: "space-around",
-};
-const loadingCircle = {
-  display: "block",
-  width: "1rem",
-  height: "1rem",
-  backgroundColor: "#3A36DB",
-  borderRadius: "0.5rem",
-};
+const Loader = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 
-const loadingContainerVariants = {
-  start: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-  end: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+export default function LoaderExample() {
+  const [isLoading, setIsLoading] = useState(true);
 
-const loadingCircleVariants = {
-  start: {
-    y: "0%",
-  },
-  end: {
-    y: "60%",
-  },
-};
-const loadingCircleTransition = {
-  duration : 0.4,
-  yoyo : Infinity,
-  ease: 'easeInOut'
-}
-
-const Loader = () => {
+ 
   return (
-    <div>
-      <div className="fixed  w-full min-h-screen z-50 bg-black opacity-30" />
-      <div className="flex fixed w-full justify-center items-center h-screen">
-        <motion.div
-          style={loadingContainer}
-          variants={loadingContainerVariants}
-          initial="start"
-          animate="end"
-        >
-          <motion.span
-            style={loadingCircle}
-            variants={loadingCircleVariants}
-            transition={loadingCircleTransition}
-          ></motion.span>
-          <motion.span
-            style={loadingCircle}
-            variants={loadingCircleVariants}
-            transition={loadingCircleTransition}
-          ></motion.span>
-          <motion.span
-            style={loadingCircle}
-            variants={loadingCircleVariants}
-            transition={loadingCircleTransition}
-          ></motion.span>
-        </motion.div>
-      </div>
-    </div>
+    <Loader>
+      {isLoading && (
+        <>
+          <span>Loading....</span>
+          <br />
+          <motion.div
+            animate={{
+              rotate: 360,
+              borderRadius: ["50% 50%", "2% 50%"],
+              x: 75,
+            }}
+            initial={{
+              x: -75,
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+              ease: "easeInOut",
+            }}
+            style={{
+              height: "50px",
+              background: "#1b5788",
+              width: "50px",
+              borderRadius: "2% 50%",
+            }}
+          ></motion.div>
+        </>
+      )}
+    </Loader>
   );
-};
-
-export default Loader;
+}

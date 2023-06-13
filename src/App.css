@@ -10,7 +10,11 @@ body {
   min-height: 100vh;
   background: #071622;
   overflow-x: hidden;
-  background:  linear-gradient( to right,rgba(13,44,68,.6), rgba(13,44,68,.4)),url(./assets/img1.svg);
+  background: linear-gradient(
+    to right,
+    rgba(13, 44, 68, 0.4),
+    rgba(13, 44, 68, 0.4)
+  );
   background-repeat: no-repeat;
   /* background-size: contain; */
 }
@@ -22,44 +26,51 @@ body {
     transform: rotate(360deg);
   }
 }
-
-.pagination {
+/*  */.pagination {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-.pagination li {
-  border: 1px solid #ccc;
-  padding: 5px;
-  margin: 2px;
-  border-radius: 2px;
+  margin-bottom: 1rem;
 }
 
-.pagination a {
-  width: 100px;
-  overflow-x: hidden;
-  color: #efefef;
-  text-decoration: none;
-  padding: 8px 12px;
-  margin: 0 4px;
+.page-item {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #fff;
 }
 
-.pagination li:hover {
-  background-color: #f5f5f5;
-  color: #333;
+.page-item.active {
+  background-color: #0fbcf9;
+  color: #fff;
 }
 
-.pagination .active {
-  background-color: #efefef;
-  color: #333;
+.page-link {
+  color: #000;
+  font-size: 1rem;
 }
 
-.pagination .disabled {
-  opacity: 0.6;
-  pointer-events: none;
+.page-link:hover {
+  color: #0fbcf9;
 }
 
+.previous,
+.next {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.previous {
+  border-right: 1px solid #0fbcf9;
+}
+
+.next {
+  border-left: 1px solid #0fbcf9;
+}
+/*  */
 .card {
   width: 18rem;
   height: auto;
@@ -167,4 +178,11 @@ body {
   align-items: center;
   border-bottom: 1px solid rgba(245, 245, 245, 0.4);
   padding: 15px 5px;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
