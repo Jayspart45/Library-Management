@@ -32,7 +32,7 @@ export default function Login() {
       className="Login centered text-white"
       style={{ flexDirection: "column" }}
     >
-      <h1 className="display-4">Login</h1>
+      <h1 className="display-4 mb-4">Login</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">
           Email

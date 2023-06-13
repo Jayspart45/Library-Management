@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Spinner from "./Spinner";
-import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import BookList from "./BookList";
 import Pagination from "./Pagination";
 
-const BooksPage = ({ searchQuery, handleAddToCart,filter,sortBy }) => {
+const BooksPage = ({ searchQuery, handleAddToCart, filter, sortBy,name }) => {
   const [books, setBooks] = useState([]);
- 
 
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -17,8 +15,7 @@ const BooksPage = ({ searchQuery, handleAddToCart,filter,sortBy }) => {
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
   };
- 
-  
+
   useEffect(() => {
     const fetchBooks = async () => {
       setLoading(true);
@@ -26,13 +23,15 @@ const BooksPage = ({ searchQuery, handleAddToCart,filter,sortBy }) => {
       try {
         const filterParam = filter ? `intitle:${filter}` : ""; // Filter by book title
         const orderBy = sortBy ? `orderBy=${sortBy}` : ""; // Sort by parameter
-    
+
         const response = await fetch(
           `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
             `${filterParam} ${searchQuery}`
-          )}&startIndex=${currentPage * perPage}&maxResults=${perPage}&${orderBy}`
+          )}&startIndex=${
+            currentPage * perPage
+          }&maxResults=${perPage}&${orderBy}`
         );
-    
+
         const data = await response.json();
         console.log(data);
         if (data.items) {
@@ -45,7 +44,6 @@ const BooksPage = ({ searchQuery, handleAddToCart,filter,sortBy }) => {
 
         setLoading(false);
       } catch (error) {
-        
         console.error("Error fetching books:", error);
         setLoading(false);
       }
@@ -56,10 +54,13 @@ const BooksPage = ({ searchQuery, handleAddToCart,filter,sortBy }) => {
 
   return (
     <div>
-      <h1 className="text-center display-2 text-light">Book List</h1>
-      <Link className="btn" to="/cart">
-        Cart
-      </Link>
+      <h1 className="text-center display-2 text-light">
+        Book List
+        <Link className="ms-5 btn" to="/cart">
+          Cart
+          <i className="fa-solid fa-cart-shopping"></i>
+        </Link>
+      </h1>
 
       {loading ? (
         <Spinner />

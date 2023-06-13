@@ -20,7 +20,7 @@ const SearchBar = ({ onSearch }) => {
           type="text"
           value={searchQuery}
           onChange={handleSearchChange}
-          placeholder="Search books"
+          placeholder="Search books by Book Name,Author Name,etc..."
         />
         <button type="submit" className="search-button">
           Search
