@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Spinner from "../FeatureComponent/Spinner";
 import { Link } from "react-router-dom";
 import BookList from "./BookList";
 import Pagination from "../FeatureComponent/Pagination";
 import User from "../FeatureComponent/User";
 
-const BooksPage = ({ searchQuery, handleAddToCart, filter, sortBy, user, cartItems }) => {
+const BooksPage = ({
+  searchQuery,
+  handleAddToCart,
+  filter,
+  sortBy,
+  cartItems,
+}) => {
   const [books, setBooks] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -13,6 +19,11 @@ const BooksPage = ({ searchQuery, handleAddToCart, filter, sortBy, user, cartIte
   const [error, setError] = useState(null);
   const perPage = 12;
   const [cartLength, setCartLength] = useState(0);
+  const [userdata, SetUserData] = useState(() => {
+    const localvalue = localStorage.getItem("user");
+    if (localvalue == null) return "";
+    return localvalue;
+  });
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
@@ -31,13 +42,14 @@ const BooksPage = ({ searchQuery, handleAddToCart, filter, sortBy, user, cartIte
       try {
         const filterParam = filter ? `intitle:${filter}` : ""; // Filter by book title
         const orderBy = sortBy ? `orderBy=${sortBy}` : ""; // Sort by parameter
-
+       
         const response = await fetch(
           `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
             `${filterParam} ${searchQuery}`
-          )}&startIndex=${
-            currentPage * perPage
-          }&maxResults=${perPage}&${orderBy}`
+          )}&startIndex=${Math.min(
+            currentPage * perPage,
+            40
+          )}&maxResults=${perPage}&${orderBy}`
         );
 
         if (!response.ok) {
@@ -66,10 +78,6 @@ const BooksPage = ({ searchQuery, handleAddToCart, filter, sortBy, user, cartIte
     fetchBooks();
   }, [searchQuery, currentPage]);
 
-  const handleLogout = () => {
-    // Perform logout actions here
-  };
-
   useEffect(() => {
     const cartLength = cartItems.length;
     if (cartLength) {
@@ -77,19 +85,10 @@ const BooksPage = ({ searchQuery, handleAddToCart, filter, sortBy, user, cartIte
     }
   }, [cartItems]);
 
-  const [name, setName] = useState(() => {
-    const storedName = localStorage.getItem("name");
-    return storedName || user;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("name", user);
-  }, [name]);
-
   return (
     <div>
       <h1 className="text-center topBar display-2 text-light">
-        <User name={name} />
+        <User name={userdata} />
         Book List
         <Link className="ms-5 btn position-relative" to="/cart">
           Cart
@@ -100,7 +99,7 @@ const BooksPage = ({ searchQuery, handleAddToCart, filter, sortBy, user, cartIte
           )}
           <i className="fa-solid fa-cart-shopping"></i>
         </Link>
-        <Link to="/" className="btn" onClick={handleLogout}>
+        <Link to="/" className="btn">
           Logout
           <i className="fa-solid ms-2 fa-right-from-bracket"></i>
         </Link>

@@ -17,7 +17,7 @@ export default function Book({ handleAddToCart,cartItems }) {
     setSortBy(value);
   };
   const location = useLocation();
-  const id = location.state ? location.state.id : null;
+  
   return (
     <div>
       <SearchBar
@@ -28,7 +28,7 @@ export default function Book({ handleAddToCart,cartItems }) {
       />
       <BooksPage
       cartItems={cartItems}
-        user={id}
+          
         filter={filter}
         sortBy={sortBy}
         searchQuery={searchQuery}

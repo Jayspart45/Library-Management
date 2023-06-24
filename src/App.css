@@ -219,7 +219,6 @@ body {
 
 /*  Card List */
 
-
 .CardItem {
   list-style: none;
   flex-wrap: wrap;
@@ -260,12 +259,20 @@ body {
   color: #fff;
   margin-left: 10px;
 }
-.bg-img{
+.bg-img {
   background: url(./assets/img3.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
+.emptyCart {
+  width: 250px;
+  height: auto;
+  background: rgba(13, 44, 68, 0.5);
+  border: 1px solid #0d2c44;
+  border-radius: 2px;
+}
+
 /* Login */
 .Login form {
   padding: 50px 20px;

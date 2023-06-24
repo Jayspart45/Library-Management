@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 // Connect to MongoDB
+const mongodbUrl = process.env.MONGODB_ATLAS_URL;
+
 mongoose.connect("mongodb+srv://jay:1357945@cluster0.u2uewqx.mongodb.net/DevRev", {
   useNewUrlParser: true,
   useUnifiedTopology: true,

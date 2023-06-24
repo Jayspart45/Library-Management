@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Alert from "../FeatureComponent/Alert"; // Import the custom alert component
 
 export default function Login() {
@@ -23,7 +23,10 @@ export default function Login() {
       });
 
       if (response.data === "Success") {
-        navigate("/book", { state: { id: email } });
+      
+            localStorage.setItem("user", email);
+       
+        navigate("/book");
       } else if (response.data === "Incorrect Password") {
         setAlertData({
           type: "danger",

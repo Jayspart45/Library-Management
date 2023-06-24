@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Alert from "./Alert";
 
-const Cart = ({ cartItems }) => {
+const Cart = ({
+  cartItems,
+  handleRemoveFromCart,
+  handleCheckout,
+  alert,
+  msg,
+}) => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
     setCart(cartItems);
   }, [cartItems]);
-
-  const handleRemoveFromCart = (bookId) => {
-    const updatedCart = cart.filter((item) => item.id !== bookId);
-    setCart(updatedCart);
-  };
 
   const countTotalQuantity = (bookId) => {
     const totalQuantity = cart.reduce((total, item) => {
@@ -24,19 +26,12 @@ const Cart = ({ cartItems }) => {
   };
 
   const uniqueBooks = [...new Set(cart.map((item) => item.id))];
-
-  const handleCheckout = () => {
-    // Simulate successful purchase
-    const successMessage = "Successfully purchased items in the cart.";
-    showAlert(successMessage);
-  };
-
-  const showAlert = (message) => {
-    alert(message); // Display the message using a simple browser alert
-  };
+  console.log(uniqueBooks);
 
   return (
     <div className="centered bg-img" style={{ flexDirection: "column" }}>
+      {alert ? <Alert title={msg} type={"success"} /> : <></>}
+
       <h2 className="display-3 text-white text-center">Cart</h2>
       {cart.length > 0 ? (
         <table className="CartList">
@@ -54,12 +49,15 @@ const Cart = ({ cartItems }) => {
               return (
                 <tr key={bookId}>
                   <td>{book.volumeInfo.title}</td>
-                  <td contentEditable>{countTotalQuantity(bookId)}</td>
+                  <td>{countTotalQuantity(bookId)}</td>
                   <td>
                     {book.saleInfo.retailPrice &&
                     book.saleInfo.retailPrice.amount ? (
                       <>
-                        {book.saleInfo.retailPrice.amount}
+                        {(
+                          book.saleInfo.retailPrice.amount *
+                          countTotalQuantity(bookId)
+                        ).toFixed(2)}
                         <i className="ms-2 fa-solid fa-indian-rupee-sign"></i>
                       </>
                     ) : (
@@ -77,7 +75,11 @@ const Cart = ({ cartItems }) => {
           </tbody>
         </table>
       ) : (
-        <h1 className="lead text-danger">Cart Is Empty</h1>
+        <>
+          <h1 className="lead   text-danger" >Cart Is Empty</h1>
+
+          <img className="emptyCart" src={"./empty.svg"} alt="" />
+        </>
       )}
       <div>
         <Link to="/book" className="btn mt-5">
